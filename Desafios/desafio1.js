@@ -1,67 +1,59 @@
-class Productmanager {
+
+class ProductManager {
     constructor() {
-        this.products = []
+        this.product = [];
     }
 
-    static id = 0
-
-    addProduct(title, description, price, thumbnail, code, stock){
-        for(let i = 0; i<this.products.length; i++){
-            if(this.products[i].code === code){
-                console.log(`El codigo ${code} esta repetido en el producto ${title}`)
-                break
-            }
-        }
-
+    addProduct(title, description, price, thumbnail, code, stock) {
+        const productoId = this.product.length + 1;
         const newProduct = {
-            title, description, price, thumbnail, code, stock
+            id: productoId,
+            title,
+            description,
+            price,
+            thumbnail,
+            code,
+            stock
         }
-
-        if(!Object.values(newProduct).includes(undefined))
-        {
-            Productmanager.id++
-            this.products.push({
-                ...newProduct,  
-                id:Productmanager.id
-            })
-        }else{
-            console.log("All fields are required")
-        }
-
-        
+        if (this.product.find((product) => product.code === newProduct.code)) {
+            console.log(`El codigo ${code} ya esta en uso`)
+        } else if (Object.values(newProduct).includes(undefined)) {
+            console.log("Todos los campos son requeridos");
+        } else {
+            this.product.push(newProduct)
+        } return
     }
 
-    getProduct(){
-        return this.products;
+    getProducts() {
+        return this.product
     }
 
-    exists (id){
-        return this.products.find((prod) => prod.id === id)
-    }
-
-    getProductById(id){
-        !this.exists(id) ? console.log("Product Not Found"): console.log(this.exists(id))
+    getProductById(id) {
+        const buscarId = this.product.find((product) => product.id === id)
+        if (!buscarId) {
+            console.log("Not found")
+        } else {
+            console.log("Producto encontrado");
+        } return
     }
 }
 
-const productsPM = new Productmanager
+const productManager = new ProductManager()
 
-//Productos vacios
-console.log(productsPM.getProduct())
 
-//Agregamos el producto 1
-productsPM.addProduct('Titulo 1','Descripcion 1', 2500,'imagen1',1111,10)
-//Agregamos el producto 2
-productsPM.addProduct('Titulo 2','Descripcion 2', 5500,'imagen2',2222)
+//agregar productos
 
-//Segunda llamada = arreglo con producto
-console.log(productsPM.getProduct())
+productManager.addProduct("Sin titulo", "Sin descripcion", 200, "Sin imagen", "abc123", 25)
+productManager.addProduct("Sin titulo 2", "Sin descripcion 2", 300, "Sin imagen 2", "abc123", 25)
+productManager.addProduct("Sin titulo 3", "Sin descripcion 3", 400, "Sin imagen 3", "abc1234", 25)
+productManager.addProduct("Sin titulo 3", 400, 25)
 
-//Agregamos el producto 3 para validar codigo repetido
-productsPM.addProduct('Titulo 3','Descripcion 3', 10500,'imagen3',1111,20)
+//obtener productos
 
-//Se busca Producto por Id no encontrado
-productsPM.getProductById(3)
+const productos = productManager.getProducts()
+console.log("Productos: ", productos);
 
-//Se busca Producto por Id
-productsPM.getProductById(2)
+// buscar productos por id
+
+const buscarProductos = productManager.getProductById(1)
+console.log(buscarProductos);
