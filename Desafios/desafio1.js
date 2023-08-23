@@ -22,4 +22,4 @@ class ProductManager {
 
 const producto1 = new ProductManager("hola");
 
-console.log(producto1);
+console.log();
