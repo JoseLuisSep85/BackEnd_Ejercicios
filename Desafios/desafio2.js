@@ -66,7 +66,7 @@ const crearJson = () => {
         
     }
 }
-fs.
+
 
 const productManager = new ProductManager()
 
