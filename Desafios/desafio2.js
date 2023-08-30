@@ -51,7 +51,7 @@ class ProductManager {
         const eliminarProducto = this.product.findIndex((product) => product.id === id)
         if (eliminarProducto !== -1)
             this.product.splice(eliminarProducto, 1)
-            fs.writeFileSync("productos.json", JSON.stringify(eliminarProducto))
+        crearJson();
     }
 }
 

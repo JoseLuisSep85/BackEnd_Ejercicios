@@ -1,0 +1,3 @@
+{"product":[
+    {"id":1,"title":"Sin titulo 1","description":"Sin descripcion 1","price":200,"thumbnail":"Sin imagen 1","code":"abc123","stock":25},
+    {"id":3,"title":"Sin titulo 3","description":"Sin descripcion 3","price":400,"thumbnail":"Sin imagen 3","code":"abc12345","stock":25}]}
