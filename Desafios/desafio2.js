@@ -40,26 +40,37 @@ class ProductManager {
         } return
     }
 
-    updateProduct(id, nuevoItem) {
+    updateProduct(id, updatedProduct) {
         const actualizarProducto = this.product.findIndex((product) => product.id === id)
-        if (actualizarProducto !== -1)
-            this.product.splice(actualizarProducto, 1, nuevoItem)
-        
+        if (actualizarProducto !== -1) {
+            this.product[actualizarProducto] = {
+                id, ...updatedProduct
+            }
+            fs.writeFileSync("productos.json", JSON.stringify((this.product)));
+            console.log("Producto actualizado con exito");
+        } else {
+            console.error("No se pudo actualizar el producto", error);
+        }
     }
 
     deleteProduct(id) {
         const eliminarProducto = this.product.findIndex((product) => product.id === id)
-        if (eliminarProducto !== -1)
+        if (eliminarProducto !== -1) {
             this.product.splice(eliminarProducto, 1)
-        crearJson();
+            fs.writeFileSync("productos.json", JSON.stringify(productManager))
+            console.log("Producto eliminado con exito");
+        } else {
+            console.error("No se puedo eliminar el producto")
+        }
+            
+
     }
 }
 
 const crearJson = () => {
-    const data = productManager;
 
     try {
-        fs.writeFileSync("productos.json", JSON.stringify(data))
+        fs.writeFileSync("productos.json", JSON.stringify(productManager))
         console.log("Archivo creado de manera correcta");
     } catch (error) {
         console.error("Archivo no puede ser creado", error);
@@ -80,11 +91,17 @@ productManager.addProduct("Sin titulo 3", "Sin descripcion 3", 400, "Sin imagen 
 // crea el archivo .json con los objetos
 crearJson();
 
-// elimina un objeto seleccionado
-productManager.deleteProduct(2);
+// actualizar un producto
+const updatedProduct = {
+    title: "Sin titulo 4",
+    description: "Sin descripcion 4",
+    price: 500,
+    thumbnail: "Sin imagen 4",
+    code: "abc123456",
+    stock: 25
+};
 
-// se actualiza producto y se mantiene el id
-// const productoNuevo = productManager.addProduct("Sin titulo 4", "Sin descripcion 4", 500, "Sin imagen 4", "abc123456", 25)
+productManager.updateProduct(2, updatedProduct);
 
-// actualizar producto
-// productManager.updateProduct(1, productoNuevo);
+productManager.deleteProduct(1);
+
