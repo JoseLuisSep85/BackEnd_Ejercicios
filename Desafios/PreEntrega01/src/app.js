@@ -1,24 +1,19 @@
 const express = require('express');
-const path = require("path")
-const petsRouter = require("./routes/pets.router")
-const usersRouter = require("./routes/user.router")
 const app = express();
+const productsRouter = require('./routes/products.router');
+const cartsRouter = require('./routes/carts.router');
+const path = require('path');
 const PORT = 8080;
 
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
-
-app.use(express.static(path.join(__dirname, 'public')))
-
-app.use("/", petsRouter)
-app.use("/", usersRouter)
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 
-app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "public", "index.html"))
-})
+app.use("/", productsRouter)
+app.use("/", cartsRouter)
+
 
 
 app.listen(PORT, () => {
-    console.log(`Servidor corriendo en el puerto ${PORT}`);
-})
+    console.log(`Servidor corriendo el puerto ${PORT}`)
+});
