@@ -1,16 +1,16 @@
-const express = require('express');
-const router = express.Router();
+const Router = require('express');
+const CartManager= require("../controllers/CartManager")
+const CartRouter = Router();
 
-const carts = [];
+const carts = new CartManager();
 
-router.get("/api/carts", (req, res) => {
-  res.json(carts)  
+CartRouter.get("/", async (req, res) => {
+    res.send(await carts.readProducts)
 })
 
-router.post("/api/carts", (req, res) => {
-    const newCart = req.body
-    products.push(newCart)
-    res.json({message: "Carro agregado"})
+CartRouter.post("/", async (req, res) => {
+    res.send(await carts.addCarts)
 })
 
-module.exports = router;
+
+module.exports = CartRouter;
