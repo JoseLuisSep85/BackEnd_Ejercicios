@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Aplicacion con Websocket</h1>
+    <input type="text" id="mensaje" placeholder="Escriba su mensaje">
+    <button id="btn-send" onclick="enviarMensaje">Enviar</button>
+    
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        
+        const socket = io()
+
+        Function enviarMensaje() => {
+            const mensaje = document.getElementById("mensaje").value
+            socket.emit("mensaje", mensaje)
+
+        }
+
+        const boton = document.getElementById("btn-send")
+        boton.addEventListener("click", () => { 
+            console.log("Enviando mensaje")
+        })
+
+        socket.on("mensaje", (data) => {
+                console.log(`Mensaje recibido del servidor, ${data}`)
+        })
+    </script>
+
+</body>
+</html>
