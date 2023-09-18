@@ -2,7 +2,7 @@ const Router = require('express');
 const ProductManager = require ('../controllers/ProductManager.js');
 
 const ProductRouter = Router();
-const product = new ProductManager();
+const product = new ProductManager;
 
 
 
