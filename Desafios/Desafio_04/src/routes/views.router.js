@@ -13,12 +13,14 @@ router.get("/", async (req, res) => {
 })
 
 router.get("/realtimeproducts", async (req, res) => {
-    const allProducts = await product.getProduct()
-    res.render("realtimeproducts", {
-        title: "TecnoPlay",
-        products: allProducts
+    const totalProd = await product.getProduct()
+    res.render("realTimeProducts", {
+        title: "Productos WebSocket",
+        products: totalProd
     })
 })
+
+
 
 
 module.exports = router
