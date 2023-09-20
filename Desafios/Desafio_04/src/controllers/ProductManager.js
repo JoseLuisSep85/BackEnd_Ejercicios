@@ -29,6 +29,14 @@ module.exports = class Productmanager {
         return "Producto agregado"
     }
 
+    // addproduct = async (title, description, price, thumbnail, code, stock) => {
+    //     const productsOld = await this.readProducts();
+    //     product.id = uuidv4()
+    //     const productAll = [...productsOld, product];
+    //     await this.writeProducts(productAll)
+    //     return "Producto agregado"
+    // }
+
     getProduct = async () => {
         return await this.readProducts();
     }

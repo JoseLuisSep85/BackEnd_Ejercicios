@@ -31,11 +31,11 @@ app.use("/api/products", ProductRouter)
 app.use("/api/cart", CartRouter)
 
 
-
-socketServer.on("connection", socket => {
+//servidor websocket
+socketServer.on('connection', socket => {
     console.log("Nuevo cliente conectado")
     
-    socket.on("message", data => {
+    socket.on('message', data => {
         console.log(data)
     })
 
